@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Analysis of Etlaala's Social Media Impact</title>
+    <title>تحليل ديناميكي لتأثير إطلالة على وسائل التواصل الاجتماعي</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -17,7 +17,7 @@
             --text-color: #333;
             --bg-color: #f8f9fa;
             --card-bg: #ffffff;
-            --font-main: 'Roboto', sans-serif;
+            --font-main: 'Cairo', sans-serif;
             --font-alt: 'Poppins', sans-serif;
         }
 
@@ -40,6 +40,31 @@
             margin: 0 auto;
             padding: 0 15px;
         }
+        
+        .lang-switcher-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+
+        #lang-switcher {
+            background-color: var(--accent-color);
+            color: #333;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: var(--font-alt);
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-size: 0.9em;
+        }
+
+        #lang-switcher:hover {
+            background-color: #ffdb58;
+        }
 
         /* --- Mobile First Base Styles --- */
         header {
@@ -47,16 +72,16 @@
             color: white;
             padding: 60px 0 80px;
             text-align: center;
-            border-bottom-right-radius: 40% 15%;
             border-bottom-left-radius: 40% 15%;
+            border-bottom-right-radius: 40% 15%;
+            position: relative;
         }
 
         header h1 {
             font-size: 2.2em;
-            font-weight: 700;
+            font-weight: 900;
             margin-bottom: 15px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-            font-family: var(--font-alt);
         }
 
         header p {
@@ -89,7 +114,6 @@
             margin-bottom: 35px;
             text-align: center;
             position: relative;
-            font-family: var(--font-alt);
         }
 
         h2::after {
@@ -99,8 +123,8 @@
             background-color: var(--accent-color);
             position: absolute;
             bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 50%;
+            transform: translateX(50%);
             border-radius: 2px;
         }
 
@@ -121,11 +145,10 @@
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            font-family: var(--font-alt);
         }
         
         .card h3 .fab, .card h3 .fas {
-            margin-right: 12px;
+            margin-left: 12px;
             font-size: 1.1em;
         }
 
@@ -177,7 +200,7 @@
 
         .smart-summary {
             background: linear-gradient(135deg, #e9f7ef, #d4edda);
-            border-left: 7px solid var(--success-color);
+            border-right: 7px solid var(--success-color);
             padding: 25px;
             border-radius: 15px;
         }
@@ -185,12 +208,10 @@
         .smart-summary h3 {
             font-size: 1.5em;
             margin-bottom: 15px;
-            font-family: var(--font-alt);
         }
 
         .smart-summary ul {
             list-style: none;
-            padding-left: 0;
         }
 
         .smart-summary li {
@@ -205,7 +226,7 @@
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             color: var(--success-color);
-            margin-right: 12px;
+            margin-left: 12px;
             margin-top: 4px;
         }
         
@@ -241,8 +262,8 @@
             width: 0;
             border-radius: 5px;
             transition: width 2s ease-in-out;
-            text-align: right;
-            padding-right: 10px;
+            text-align: left;
+            padding-left: 10px;
             color: #555;
             font-weight: bold;
             line-height: 22px;
@@ -297,8 +318,8 @@
         @media (min-width: 1024px) {
             header {
                 padding: 80px 0 100px;
-                border-bottom-right-radius: 50% 20%;
                 border-bottom-left-radius: 50% 20%;
+                border-bottom-right-radius: 50% 20%;
             }
 
             header h1 {
@@ -334,53 +355,56 @@
 </head>
 <body>
 
+    <div class="lang-switcher-container">
+            <a href="index.html" id="lang-switcher">English</a>
+        </div>
     <header>
         <div class="lang-switcher-container">
-            <a href="ar.html" id="lang-switcher">العربية</a>
+            <a href="index.html" id="lang-switcher">English</a>
         </div>
         <div class="container">
-            <h1>Etlaala's Accelerating Social Media Growth</h1>
-            <p>A dynamic analysis showcasing the powerful performance and massive growth of Etlaala's digital footprint.</p>
+            <h1>النمو المتسارع لإطلالة على وسائل التواصل</h1>
+            <p>تحليل ديناميكي يعرض الأداء القوي والنمو الهائل لبصمة إطلالة الرقمية</p>
         </div>
     </header>
 
     <main class="container">
         <section class="fade-in">
             <div class="smart-summary">
-                <h3><i class="fas fa-lightbulb"></i> Performance Summary: A Story of Success & Growth</h3>
+                <h3><i class="fas fa-lightbulb"></i> ملخص الأداء: قصة نجاح ونمو</h3>
                 <ul>
-                    <li><strong>Massive Growth:</strong> Recent data reveals explosive performance growth across key platforms, turning a previous challenge into a major strategic opportunity.</li>
-                    <li><strong>TikTok is the Engine:</strong> TikTok is leading the growth with huge reach and engagement rates (+442% in video views), proving to be the most effective channel for reaching new audiences.</li>
-                    <li><strong>Facebook & YouTube Show Strength:</strong> Both Facebook and YouTube are achieving triple-digit growth in reach and engagement, indicating a successful content strategy and renewed audience interest.</li>
-                    <li><strong>The Opportunity in Conversion:</strong> The challenge now is to translate this massive reach and engagement into actual bookings and business growth, leveraging the current momentum to build lasting brand loyalty.</li>
+                    <li><strong>نمو هائل:</strong> تُظهر البيانات الأخيرة نموًا انفجاريًا في الأداء عبر المنصات الرئيسية، مما يحول التحدي السابق إلى فرصة استراتيجية ضخمة.</li>
+                    <li><strong>تيك توك هو المحرك:</strong> يقود تيك توك النمو بمعدلات وصول ومشاركة هائلة (+442% في مشاهدات الفيديو)، مما يثبت أنه القناة الأكثر فعالية للوصول إلى جمهور جديد.</li>
+                    <li><strong>فيسبوك ويوتيوب يظهران قوة:</strong> تحقق كل من فيسبوك ويوتيوب نموًا ثلاثي الأرقام في الوصول والمشاركة، مما يشير إلى نجاح استراتيجية المحتوى وتجدد اهتمام الجمهور.</li>
+                    <li><strong>الفرصة في التحويل:</strong> التحدي الآن هو ترجمة هذا الوصول والمشاركة الهائلين إلى حجوزات فعلية ونمو في الأعمال، مع الاستفادة من الزخم الحالي لبناء ولاء دائم للعلامة التجارية.</li>
                 </ul>
             </div>
         </section>
 
         <section class="fade-in">
-            <h2><i class="fas fa-rocket"></i> Platform Performance: Numbers That Speak for Themselves</h2>
+            <h2><i class="fas fa-rocket"></i> أداء المنصات: أرقام تتحدث عن نفسها</h2>
             <div class="grid">
                 <div class="card">
                     <h3><i class="fab fa-tiktok"></i> TikTok</h3>
                     <div class="stat-grid">
                         <div class="metric">
                             <div class="value" data-target="104128">0</div>
-                            <div class="label">Video Views</div>
+                            <div class="label">مشاهدات الفيديو</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 442.2%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="91494">0</div>
-                            <div class="label">Reach</div>
+                            <div class="label">الوصول</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 68.52%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="2478">0</div>
-                            <div class="label">Likes</div>
+                            <div class="label">الإعجابات</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 214.87%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="1135">0</div>
-                            <div class="label">Shares</div>
+                            <div class="label">المشاركات</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 627.5%</div>
                         </div>
                     </div>
@@ -390,22 +414,22 @@
                     <div class="stat-grid">
                         <div class="metric">
                             <div class="value" data-target="57492">0</div>
-                            <div class="label">Total Reach</div>
+                            <div class="label">إجمالي الوصول</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 13.96%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="3222">0</div>
-                            <div class="label">Profile Visits</div>
+                            <div class="label">زيارات الملف الشخصي</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 101.5%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="986">0</div>
-                            <div class="label">Interactions</div>
+                            <div class="label">التفاعلات</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 103.3%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="40">0</div>
-                            <div class="label">Post Shares</div>
+                            <div class="label">مشاركات المنشورات</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 233.33%</div>
                         </div>
                     </div>
@@ -415,22 +439,22 @@
                     <div class="stat-grid">
                         <div class="metric">
                             <div class="value" data-target="8245">0</div>
-                            <div class="label">Page Reach</div>
+                            <div class="label">وصول الصفحة</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 200.13%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="11455">0</div>
-                            <div class="label">Total Impressions</div>
+                            <div class="label">إجمالي مرات الظهور</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 212.55%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="2016">0</div>
-                            <div class="label">Post Engagements</div>
+                            <div class="label">تفاعل المنشورات</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 209.68%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="183">0</div>
-                            <div class="label">New Likes</div>
+                            <div class="label">إعجابات جديدة</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 490.32%</div>
                         </div>
                     </div>
@@ -440,22 +464,22 @@
                     <div class="stat-grid">
                         <div class="metric">
                             <div class="value" data-target="1815">0</div>
-                            <div class="label">Total Views</div>
+                            <div class="label">إجمالي المشاهدات</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 1307.23%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="1797">0</div>
-                            <div class="label">Shorts Views</div>
+                            <div class="label">مشاهدات Shorts</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 1611.43%</div>
                         </div>
                         <div class="metric">
-                            <div class_="value"><span data-target="154">0</span><span class="small-text"> min</span></div>
-                            <div class="label">Watch Time</div>
+                            <div class="value"><span data-target="154">0</span><span class="small-text"> دقيقة</span></div>
+                            <div class="label">وقت المشاهدة</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 905.88%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="3">0</div>
-                            <div class="label">New Subscribers</div>
+                            <div class="label">مشتركون جدد</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 200%</div>
                         </div>
                     </div>
@@ -464,26 +488,26 @@
         </section>
 
         <section class="fade-in">
-            <h2><i class="fas fa-map-marker-alt"></i> Instagram Audience Distribution</h2>
+            <h2><i class="fas fa-map-marker-alt"></i> توزيع جمهور انستغرام</h2>
             <div class="bar-chart-container">
                 <div class="bar-chart-item">
-                    <div class="bar-chart-label"><span>Riyadh</span><span>37.2%</span></div>
+                    <div class="bar-chart-label"><span>الرياض</span><span>37.2%</span></div>
                     <div class="bar-background"><div class="bar" data-width="100%"></div></div>
                 </div>
                 <div class="bar-chart-item">
-                    <div class="bar-chart-label"><span>Jeddah</span><span>19.9%</span></div>
+                    <div class="bar-chart-label"><span>جدة</span><span>19.9%</span></div>
                     <div class="bar-background"><div class="bar" data-width="53.5%"></div></div>
                 </div>
                 <div class="bar-chart-item">
-                    <div class="bar-chart-label"><span>Dammam</span><span>7.7%</span></div>
+                    <div class="bar-chart-label"><span>الدمام</span><span>7.7%</span></div>
                     <div class="bar-background"><div class="bar" data-width="20.7%"></div></div>
                 </div>
                 <div class="bar-chart-item">
-                    <div class="bar-chart-label"><span>Mecca</span><span>3.1%</span></div>
+                    <div class="bar-chart-label"><span>مكة</span><span>3.1%</span></div>
                     <div class="bar-background"><div class="bar" data-width="8.3%"></div></div>
                 </div>
                  <div class="bar-chart-item">
-                    <div class="bar-chart-label"><span>Medina</span><span>2.3%</span></div>
+                    <div class="bar-chart-label"><span>المدينة المنورة</span><span>2.3%</span></div>
                     <div class="bar-background"><div class="bar" data-width="6.2%"></div></div>
                 </div>
             </div>
@@ -545,10 +569,10 @@
                     const updateCounter = () => {
                         start += increment;
                         if (start < target) {
-                            counter.innerText = Math.ceil(start).toLocaleString('en-US');
+                            counter.innerText = Math.ceil(start).toLocaleString('ar-SA');
                             setTimeout(updateCounter, stepTime);
                         } else {
-                            counter.innerText = target.toLocaleString('en-US');
+                            counter.innerText = target.toLocaleString('ar-SA');
                             const smallText = counter.querySelector('.small-text');
                             if(smallText) counter.appendChild(smallText);
                         }
