@@ -6,7 +6,7 @@
     <title>Dynamic Analysis of Etlaala's Social Media Impact</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -17,7 +17,8 @@
             --text-color: #333;
             --bg-color: #f8f9fa;
             --card-bg: #ffffff;
-            --font-main: 'Roboto', sans-serif;
+            --font-main-en: 'Roboto', sans-serif;
+            --font-main-ar: 'Cairo', sans-serif;
             --font-alt: 'Poppins', sans-serif;
         }
 
@@ -28,17 +29,52 @@
         }
 
         body {
-            font-family: var(--font-main);
+            font-family: var(--font-main-en);
             line-height: 1.7;
             color: var(--text-color);
             background-color: var(--bg-color);
             overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        body.rtl {
+            font-family: var(--font-main-ar);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
+        }
+        
+        .lang-switcher-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+        
+        body.rtl .lang-switcher-container {
+            right: auto;
+            left: 20px;
+        }
+
+        #lang-switcher {
+            background-color: var(--accent-color);
+            color: #333;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: var(--font-alt);
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-size: 0.9em;
+        }
+
+        #lang-switcher:hover {
+            background-color: #ffdb58;
         }
 
         /* --- Mobile First Base Styles --- */
@@ -49,6 +85,7 @@
             text-align: center;
             border-bottom-right-radius: 40% 15%;
             border-bottom-left-radius: 40% 15%;
+            position: relative;
         }
 
         header h1 {
@@ -57,6 +94,11 @@
             margin-bottom: 15px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
             font-family: var(--font-alt);
+        }
+        
+        body.rtl header h1 {
+            font-family: var(--font-main-ar);
+            font-weight: 900;
         }
 
         header p {
@@ -91,6 +133,11 @@
             position: relative;
             font-family: var(--font-alt);
         }
+        
+        body.rtl h2 {
+            font-family: var(--font-main-ar);
+            font-weight: 700;
+        }
 
         h2::after {
             content: '';
@@ -124,9 +171,17 @@
             font-family: var(--font-alt);
         }
         
+        body.rtl .card h3 {
+            font-family: var(--font-main-ar);
+        }
+        
         .card h3 .fab, .card h3 .fas {
             margin-right: 12px;
-            font-size: 1.1em;
+        }
+        
+        body.rtl .card h3 .fab, body.rtl .card h3 .fas {
+            margin-right: 0;
+            margin-left: 12px;
         }
 
         .grid {
@@ -155,7 +210,11 @@
         
         .metric .value .small-text {
             font-size: 0.5em;
-            font-family: var(--font-main);
+            font-family: var(--font-main-en);
+        }
+        
+        body.rtl .metric .value .small-text {
+            font-family: var(--font-main-ar);
         }
 
         .metric .label {
@@ -181,11 +240,20 @@
             padding: 25px;
             border-radius: 15px;
         }
+        
+        body.rtl .smart-summary {
+            border-left: none;
+            border-right: 7px solid var(--success-color);
+        }
 
         .smart-summary h3 {
             font-size: 1.5em;
             margin-bottom: 15px;
             font-family: var(--font-alt);
+        }
+        
+        body.rtl .smart-summary h3 {
+            font-family: var(--font-main-ar);
         }
 
         .smart-summary ul {
@@ -207,6 +275,11 @@
             color: var(--success-color);
             margin-right: 12px;
             margin-top: 4px;
+        }
+        
+        body.rtl .smart-summary li::before {
+            margin-right: 0;
+            margin-left: 12px;
         }
         
         .bar-chart-container {
@@ -247,6 +320,12 @@
             font-weight: bold;
             line-height: 22px;
             font-size: 0.8em;
+        }
+        
+        body.rtl .bar {
+            text-align: left;
+            padding-right: 0;
+            padding-left: 10px;
         }
 
         footer {
@@ -336,51 +415,51 @@
 
     <header>
         <div class="lang-switcher-container">
-            <a href="ar.html" id="lang-switcher">العربية</a>
+            <button id="lang-switcher" data-lang="ar">العربية</button>
         </div>
         <div class="container">
-            <h1>Etlaala's Accelerating Social Media Growth</h1>
-            <p>A dynamic analysis showcasing the powerful performance and massive growth of Etlaala's digital footprint.</p>
+            <h1 data-en="Etlaala's Accelerating Social Media Growth" data-ar="النمو المتسارع لإطلالة على وسائل التواصل">Etlaala's Accelerating Social Media Growth</h1>
+            <p data-en="A dynamic analysis showcasing the powerful performance and massive growth of Etlaala's digital footprint." data-ar="تحليل ديناميكي يعرض الأداء القوي والنمو الهائل لبصمة إطلالة الرقمية">A dynamic analysis showcasing the powerful performance and massive growth of Etlaala's digital footprint.</p>
         </div>
     </header>
 
     <main class="container">
         <section class="fade-in">
             <div class="smart-summary">
-                <h3><i class="fas fa-lightbulb"></i> Performance Summary: A Story of Success & Growth</h3>
+                <h3 data-en="Performance Summary: A Story of Success & Growth" data-ar="ملخص الأداء: قصة نجاح ونمو"><i class="fas fa-lightbulb"></i> Performance Summary: A Story of Success & Growth</h3>
                 <ul>
-                    <li><strong>Massive Growth:</strong> Recent data reveals explosive performance growth across key platforms, turning a previous challenge into a major strategic opportunity.</li>
-                    <li><strong>TikTok is the Engine:</strong> TikTok is leading the growth with huge reach and engagement rates (+442% in video views), proving to be the most effective channel for reaching new audiences.</li>
-                    <li><strong>Facebook & YouTube Show Strength:</strong> Both Facebook and YouTube are achieving triple-digit growth in reach and engagement, indicating a successful content strategy and renewed audience interest.</li>
-                    <li><strong>The Opportunity in Conversion:</strong> The challenge now is to translate this massive reach and engagement into actual bookings and business growth, leveraging the current momentum to build lasting brand loyalty.</li>
+                    <li data-en="Massive Growth: Recent data reveals explosive performance growth across key platforms, turning a previous challenge into a major strategic opportunity." data-ar="نمو هائل: تُظهر البيانات الأخيرة نموًا انفجاريًا في الأداء عبر المنصات الرئيسية، مما يحول التحدي السابق إلى فرصة استراتيجية ضخمة.">Massive Growth: Recent data reveals explosive performance growth across key platforms, turning a previous challenge into a major strategic opportunity.</li>
+                    <li data-en="TikTok is the Engine: TikTok is leading the growth with huge reach and engagement rates (+442% in video views), proving to be the most effective channel for reaching new audiences." data-ar="تيك توك هو المحرك: يقود تيك توك النمو بمعدلات وصول ومشاركة هائلة (+442% في مشاهدات الفيديو)، مما يثبت أنه القناة الأكثر فعالية للوصول إلى جمهور جديد.">TikTok is the Engine: TikTok is leading the growth with huge reach and engagement rates (+442% in video views), proving to be the most effective channel for reaching new audiences.</li>
+                    <li data-en="Facebook & YouTube Show Strength: Both Facebook and YouTube are achieving triple-digit growth in reach and engagement, indicating a successful content strategy and renewed audience interest." data-ar="فيسبوك ويوتيوب يظهران قوة: تحقق كل من فيسبوك ويوتيوب نموًا ثلاثي الأرقام في الوصول والمشاركة، مما يشير إلى نجاح استراتيجية المحتوى وتجدد اهتمام الجمهور.">Facebook & YouTube Show Strength: Both Facebook and YouTube are achieving triple-digit growth in reach and engagement, indicating a successful content strategy and renewed audience interest.</li>
+                    <li data-en="The Opportunity in Conversion: The challenge now is to translate this massive reach and engagement into actual bookings and business growth, leveraging the current momentum to build lasting brand loyalty." data-ar="الفرصة في التحويل: التحدي الآن هو ترجمة هذا الوصول والمشاركة الهائلين إلى حجوزات فعلية ونمو في الأعمال، مع الاستفادة من الزخم الحالي لبناء ولاء دائم للعلامة التجارية.">The Opportunity in Conversion: The challenge now is to translate this massive reach and engagement into actual bookings and business growth, leveraging the current momentum to build lasting brand loyalty.</li>
                 </ul>
             </div>
         </section>
 
         <section class="fade-in">
-            <h2><i class="fas fa-rocket"></i> Platform Performance: Numbers That Speak for Themselves</h2>
+            <h2 data-en="Platform Performance: Numbers That Speak for Themselves" data-ar="أداء المنصات: أرقام تتحدث عن نفسها"><i class="fas fa-rocket"></i> Platform Performance: Numbers That Speak for Themselves</h2>
             <div class="grid">
                 <div class="card">
                     <h3><i class="fab fa-tiktok"></i> TikTok</h3>
                     <div class="stat-grid">
                         <div class="metric">
                             <div class="value" data-target="104128">0</div>
-                            <div class="label">Video Views</div>
+                            <div class="label" data-en="Video Views" data-ar="مشاهدات الفيديو">Video Views</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 442.2%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="91494">0</div>
-                            <div class="label">Reach</div>
+                            <div class="label" data-en="Reach" data-ar="الوصول">Reach</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 68.52%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="2478">0</div>
-                            <div class="label">Likes</div>
+                            <div class="label" data-en="Likes" data-ar="الإعجابات">Likes</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 214.87%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="1135">0</div>
-                            <div class="label">Shares</div>
+                            <div class="label" data-en="Shares" data-ar="المشاركات">Shares</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 627.5%</div>
                         </div>
                     </div>
@@ -390,22 +469,22 @@
                     <div class="stat-grid">
                         <div class="metric">
                             <div class="value" data-target="57492">0</div>
-                            <div class="label">Total Reach</div>
+                            <div class="label" data-en="Total Reach" data-ar="إجمالي الوصول">Total Reach</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 13.96%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="3222">0</div>
-                            <div class="label">Profile Visits</div>
+                            <div class="label" data-en="Profile Visits" data-ar="زيارات الملف الشخصي">Profile Visits</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 101.5%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="986">0</div>
-                            <div class="label">Interactions</div>
+                            <div class="label" data-en="Interactions" data-ar="التفاعلات">Interactions</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 103.3%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="40">0</div>
-                            <div class="label">Post Shares</div>
+                            <div class="label" data-en="Post Shares" data-ar="مشاركات المنشورات">Post Shares</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 233.33%</div>
                         </div>
                     </div>
@@ -415,22 +494,22 @@
                     <div class="stat-grid">
                         <div class="metric">
                             <div class="value" data-target="8245">0</div>
-                            <div class="label">Page Reach</div>
+                            <div class="label" data-en="Page Reach" data-ar="وصول الصفحة">Page Reach</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 200.13%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="11455">0</div>
-                            <div class="label">Total Impressions</div>
+                            <div class="label" data-en="Total Impressions" data-ar="إجمالي مرات الظهور">Total Impressions</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 212.55%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="2016">0</div>
-                            <div class="label">Post Engagements</div>
+                            <div class="label" data-en="Post Engagements" data-ar="تفاعل المنشورات">Post Engagements</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 209.68%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="183">0</div>
-                            <div class="label">New Likes</div>
+                            <div class="label" data-en="New Likes" data-ar="إعجابات جديدة">New Likes</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 490.32%</div>
                         </div>
                     </div>
@@ -440,22 +519,22 @@
                     <div class="stat-grid">
                         <div class="metric">
                             <div class="value" data-target="1815">0</div>
-                            <div class="label">Total Views</div>
+                            <div class="label" data-en="Total Views" data-ar="إجمالي المشاهدات">Total Views</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 1307.23%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="1797">0</div>
-                            <div class="label">Shorts Views</div>
+                            <div class="label" data-en="Shorts Views" data-ar="مشاهدات Shorts">Shorts Views</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 1611.43%</div>
                         </div>
                         <div class="metric">
-                            <div class_="value"><span data-target="154">0</span><span class="small-text"> min</span></div>
-                            <div class="label">Watch Time</div>
+                            <div class="value"><span data-target="154">0</span><span class="small-text" data-en=" min" data-ar=" دقيقة"> min</span></div>
+                            <div class="label" data-en="Watch Time" data-ar="وقت المشاهدة">Watch Time</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 905.88%</div>
                         </div>
                         <div class="metric">
                             <div class="value" data-target="3">0</div>
-                            <div class="label">New Subscribers</div>
+                            <div class="label" data-en="New Subscribers" data-ar="مشتركون جدد">New Subscribers</div>
                             <div class="growth"><i class="fas fa-arrow-up"></i> 200%</div>
                         </div>
                     </div>
@@ -464,26 +543,26 @@
         </section>
 
         <section class="fade-in">
-            <h2><i class="fas fa-map-marker-alt"></i> Instagram Audience Distribution</h2>
+            <h2 data-en="Instagram Audience Distribution" data-ar="توزيع جمهور انستغرام"><i class="fas fa-map-marker-alt"></i> Instagram Audience Distribution</h2>
             <div class="bar-chart-container">
                 <div class="bar-chart-item">
-                    <div class="bar-chart-label"><span>Riyadh</span><span>37.2%</span></div>
+                    <div class="bar-chart-label"><span data-en="Riyadh" data-ar="الرياض">Riyadh</span><span>37.2%</span></div>
                     <div class="bar-background"><div class="bar" data-width="100%"></div></div>
                 </div>
                 <div class="bar-chart-item">
-                    <div class="bar-chart-label"><span>Jeddah</span><span>19.9%</span></div>
+                    <div class="bar-chart-label"><span data-en="Jeddah" data-ar="جدة">Jeddah</span><span>19.9%</span></div>
                     <div class="bar-background"><div class="bar" data-width="53.5%"></div></div>
                 </div>
                 <div class="bar-chart-item">
-                    <div class="bar-chart-label"><span>Dammam</span><span>7.7%</span></div>
+                    <div class="bar-chart-label"><span data-en="Dammam" data-ar="الدمام">Dammam</span><span>7.7%</span></div>
                     <div class="bar-background"><div class="bar" data-width="20.7%"></div></div>
                 </div>
                 <div class="bar-chart-item">
-                    <div class="bar-chart-label"><span>Mecca</span><span>3.1%</span></div>
+                    <div class="bar-chart-label"><span data-en="Mecca" data-ar="مكة">Mecca</span><span>3.1%</span></div>
                     <div class="bar-background"><div class="bar" data-width="8.3%"></div></div>
                 </div>
                  <div class="bar-chart-item">
-                    <div class="bar-chart-label"><span>Medina</span><span>2.3%</span></div>
+                    <div class="bar-chart-label"><span data-en="Medina" data-ar="المدينة المنورة">Medina</span><span>2.3%</span></div>
                     <div class="bar-background"><div class="bar" data-width="6.2%"></div></div>
                 </div>
             </div>
@@ -499,13 +578,33 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const animatedSections = document.querySelectorAll('section.fade-in');
+            const langSwitcher = document.getElementById('lang-switcher');
+            const translatableElements = document.querySelectorAll('[data-en], [data-ar]');
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
+            const setLanguage = (lang) => {
+                document.documentElement.lang = lang;
+                document.body.className = lang === 'ar' ? 'rtl' : '';
+                
+                translatableElements.forEach(el => {
+                    el.innerText = el.dataset[lang];
+                });
+
+                langSwitcher.dataset.lang = lang === 'en' ? 'ar' : 'en';
+                langSwitcher.innerText = lang === 'en' ? 'العربية' : 'English';
+                localStorage.setItem('language', lang);
             };
+
+            langSwitcher.addEventListener('click', () => {
+                setLanguage(langSwitcher.dataset.lang);
+            });
+
+            // Set initial language
+            const savedLang = localStorage.getItem('language') || 'en';
+            setLanguage(savedLang);
+
+            // Animation logic
+            const animatedSections = document.querySelectorAll('section.fade-in');
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
 
             const sectionObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -513,23 +612,17 @@
                         entry.target.classList.add('is-visible');
                         
                         const counters = entry.target.querySelectorAll('.value, .value span');
-                        if (counters.length > 0) {
-                            animateCounters(counters);
-                        }
+                        if (counters.length > 0) animateCounters(counters);
 
                         const bars = entry.target.querySelectorAll('.bar');
-                        if (bars.length > 0) {
-                            animateBars(bars);
-                        }
+                        if (bars.length > 0) animateBars(bars);
 
                         observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
-            animatedSections.forEach(section => {
-                sectionObserver.observe(section);
-            });
+            animatedSections.forEach(section => sectionObserver.observe(section));
 
             function animateCounters(counterElements) {
                 counterElements.forEach(counter => {
@@ -537,7 +630,7 @@
                     if (isNaN(target)) return;
                     
                     let start = 0;
-                    const duration = 2000; // 2 seconds
+                    const duration = 2000;
                     const stepTime = 10;
                     const steps = duration / stepTime;
                     const increment = target / steps;
@@ -545,10 +638,10 @@
                     const updateCounter = () => {
                         start += increment;
                         if (start < target) {
-                            counter.innerText = Math.ceil(start).toLocaleString('en-US');
+                            counter.innerText = Math.ceil(start).toLocaleString(document.documentElement.lang);
                             setTimeout(updateCounter, stepTime);
                         } else {
-                            counter.innerText = target.toLocaleString('en-US');
+                            counter.innerText = target.toLocaleString(document.documentElement.lang);
                             const smallText = counter.querySelector('.small-text');
                             if(smallText) counter.appendChild(smallText);
                         }
