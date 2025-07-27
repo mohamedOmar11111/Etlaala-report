@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحليل ديناميكي لتأثير إطلالة على وسائل التواصل الاجتماعي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #007bff;
+            --accent-color: #ffc107;
+            --success-color: #28a745;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --font-main: 'Cairo', sans-serif;
+            --font-alt: 'Poppins', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* --- Mobile First Base Styles --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 60px 0 80px;
+            text-align: center;
+            border-bottom-left-radius: 40% 15%;
+            border-bottom-right-radius: 40% 15%;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            max-width: 90%;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        main {
+            padding: 30px 0;
+        }
+
+        section {
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 35px;
+            text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            position: absolute;
+            bottom: -12px;
+            right: 50%;
+            transform: translateX(50%);
+            border-radius: 2px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card h3 {
+            font-size: 1.5em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3 .fab, .card h3 .fas {
+            margin-left: 12px;
+            font-size: 1.1em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: auto;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric .value {
+            font-size: 1.9em;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-family: var(--font-alt);
+        }
+        
+        .metric .value .small-text {
+            font-size: 0.5em;
+            font-family: var(--font-main);
+        }
+
+        .metric .label {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.3;
+        }
+
+        .metric .growth {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--success-color);
+            font-family: var(--font-alt);
+        }
+        
+        .growth .fa-arrow-up {
+            margin-right: 4px;
+        }
+
+        .smart-summary {
+            background: linear-gradient(135deg, #e9f7ef, #d4edda);
+            border-right: 7px solid var(--success-color);
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .smart-summary h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .smart-summary ul {
+            list-style: none;
+        }
+
+        .smart-summary li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .smart-summary li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--success-color);
+            margin-left: 12px;
+            margin-top: 4px;
+        }
+        
+        .bar-chart-container {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+        }
+        
+        .bar-chart-item {
+            margin-bottom: 15px;
+        }
+        
+        .bar-chart-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .bar-background {
+            background-color: #e9ecef;
+            border-radius: 5px;
+            height: 22px;
+            overflow: hidden;
+        }
+        
+        .bar {
+            background: linear-gradient(90deg, var(--accent-color), #ffdb58);
+            height: 100%;
+            width: 0;
+            border-radius: 5px;
+            transition: width 2s ease-in-out;
+            text-align: left;
+            padding-left: 10px;
+            color: #555;
+            font-weight: bold;
+            line-height: 22px;
+            font-size: 0.8em;
+        }
+
+        footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 40px;
+        }
+
+        /* --- Tablet Styles --- */
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            header h1 {
+                font-size: 3em;
+            }
+
+            h2 {
+                font-size: 2.2em;
+                margin-bottom: 40px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card h3 {
+                font-size: 1.6em;
+            }
+
+            .metric .value {
+                font-size: 2.2em;
+            }
+
+            .metric .label {
+                font-size: 1em;
+            }
+
+            .metric .growth {
+                font-size: 1.2em;
+            }
+        }
+
+        /* --- Desktop Styles --- */
+        @media (min-width: 1024px) {
+            header {
+                padding: 80px 0 100px;
+                border-bottom-left-radius: 50% 20%;
+                border-bottom-right-radius: 50% 20%;
+            }
+
+            header h1 {
+                font-size: 3.5em;
+            }
+            
+            header p {
+                font-size: 1.2em;
+            }
+
+            h2 {
+                font-size: 2.5em;
+            }
+
+            .card {
+                padding: 30px;
+            }
+
+            .smart-summary {
+                padding: 30px;
+            }
+
+            .smart-summary h3 {
+                font-size: 1.8em;
+            }
+
+            .smart-summary li {
+                font-size: 1.1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>النمو المتسارع لإطلالة على وسائل التواصل</h1>
+            <p>تحليل ديناميكي يعرض الأداء القوي والنمو الهائل لبصمة إطلالة الرقمية</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="fade-in">
+            <div class="smart-summary">
+                <h3><i class="fas fa-lightbulb"></i> ملخص الأداء: قصة نجاح ونمو</h3>
+                <ul>
+                    <li><strong>نمو هائل:</strong> تُظهر البيانات الأخيرة نموًا انفجاريًا في الأداء عبر المنصات الرئيسية، مما يحول التحدي السابق إلى فرصة استراتيجية ضخمة.</li>
+                    <li><strong>تيك توك هو المحرك:</strong> يقود تيك توك النمو بمعدلات وصول ومشاركة هائلة (+442% في مشاهدات الفيديو)، مما يثبت أنه القناة الأكثر فعالية للوصول إلى جمهور جديد.</li>
+                    <li><strong>فيسبوك ويوتيوب يظهران قوة:</strong> تحقق كل من فيسبوك ويوتيوب نموًا ثلاثي الأرقام في الوصول والمشاركة، مما يشير إلى نجاح استراتيجية المحتوى وتجدد اهتمام الجمهور.</li>
+                    <li><strong>الفرصة في التحويل:</strong> التحدي الآن هو ترجمة هذا الوصول والمشاركة الهائلين إلى حجوزات فعلية ونمو في الأعمال، مع الاستفادة من الزخم الحالي لبناء ولاء دائم للعلامة التجارية.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2><i class="fas fa-rocket"></i> أداء المنصات: أرقام تتحدث عن نفسها</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fab fa-tiktok"></i> TikTok</h3>
+                    <div class="stat-grid">
+                        <div class="metric">
+                            <div class="value" data-target="104128">0</div>
+                            <div class="label">مشاهدات الفيديو</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 442.2%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="91494">0</div>
+                            <div class="label">الوصول</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 68.52%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="2478">0</div>
+                            <div class="label">الإعجابات</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 214.87%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="1135">0</div>
+                            <div class="label">المشاركات</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 627.5%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fab fa-instagram"></i> Instagram</h3>
+                    <div class="stat-grid">
+                        <div class="metric">
+                            <div class="value" data-target="57492">0</div>
+                            <div class="label">إجمالي الوصول</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 13.96%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="3222">0</div>
+                            <div class="label">زيارات الملف الشخصي</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 101.5%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="986">0</div>
+                            <div class="label">التفاعلات</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 103.3%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="40">0</div>
+                            <div class="label">مشاركات المنشورات</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 233.33%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fab fa-facebook"></i> Facebook</h3>
+                    <div class="stat-grid">
+                        <div class="metric">
+                            <div class="value" data-target="8245">0</div>
+                            <div class="label">وصول الصفحة</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 200.13%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="11455">0</div>
+                            <div class="label">إجمالي مرات الظهور</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 212.55%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="2016">0</div>
+                            <div class="label">تفاعل المنشورات</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 209.68%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="183">0</div>
+                            <div class="label">إعجابات جديدة</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 490.32%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fab fa-youtube"></i> YouTube</h3>
+                    <div class="stat-grid">
+                        <div class="metric">
+                            <div class="value" data-target="1815">0</div>
+                            <div class="label">إجمالي المشاهدات</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 1307.23%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="1797">0</div>
+                            <div class="label">مشاهدات Shorts</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 1611.43%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value"><span data-target="154">0</span><span class="small-text"> دقيقة</span></div>
+                            <div class="label">وقت المشاهدة</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 905.88%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="value" data-target="3">0</div>
+                            <div class="label">مشتركون جدد</div>
+                            <div class="growth"><i class="fas fa-arrow-up"></i> 200%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2><i class="fas fa-map-marker-alt"></i> توزيع جمهور انستغرام</h2>
+            <div class="bar-chart-container">
+                <div class="bar-chart-item">
+                    <div class="bar-chart-label"><span>الرياض</span><span>37.2%</span></div>
+                    <div class="bar-background"><div class="bar" data-width="100%"></div></div>
+                </div>
+                <div class="bar-chart-item">
+                    <div class="bar-chart-label"><span>جدة</span><span>19.9%</span></div>
+                    <div class="bar-background"><div class="bar" data-width="53.5%"></div></div>
+                </div>
+                <div class="bar-chart-item">
+                    <div class="bar-chart-label"><span>الدمام</span><span>7.7%</span></div>
+                    <div class="bar-background"><div class="bar" data-width="20.7%"></div></div>
+                </div>
+                <div class="bar-chart-item">
+                    <div class="bar-chart-label"><span>مكة</span><span>3.1%</span></div>
+                    <div class="bar-background"><div class="bar" data-width="8.3%"></div></div>
+                </div>
+                 <div class="bar-chart-item">
+                    <div class="bar-chart-label"><span>المدينة المنورة</span><span>2.3%</span></div>
+                    <div class="bar-background"><div class="bar" data-width="6.2%"></div></div>
+                </div>
+            </div>
+        </section>
+
+        
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Made by Mo Omar 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedSections = document.querySelectorAll('section.fade-in');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        
+                        const counters = entry.target.querySelectorAll('.value');
+                        if (counters.length > 0) {
+                            animateCounters(counters);
+                        }
+
+                        const bars = entry.target.querySelectorAll('.bar');
+                        if (bars.length > 0) {
+                            animateBars(bars);
+                        }
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animatedSections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            function animateCounters(counterElements) {
+                counterElements.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    if (isNaN(target)) return;
+                    
+                    let start = 0;
+                    const duration = 2000; // 2 seconds
+                    const stepTime = 10;
+                    const steps = duration / stepTime;
+                    const increment = target / steps;
+                    
+                    const updateCounter = () => {
+                        start += increment;
+                        if (start < target) {
+                            counter.innerText = Math.ceil(start).toLocaleString('ar-SA');
+                            setTimeout(updateCounter, stepTime);
+                        } else {
+                            counter.innerText = target.toLocaleString('ar-SA');
+                             // Add special characters back if they exist
+                            const smallText = counter.querySelector('.small-text');
+                            if(smallText) counter.appendChild(smallText);
+                        }
+                    };
+                    updateCounter();
+                });
+            }
+            
+            function animateBars(barElements) {
+                 barElements.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width;
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
